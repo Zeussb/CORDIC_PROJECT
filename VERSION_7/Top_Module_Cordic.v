@@ -1,0 +1,82 @@
+module Top_Module_Cordic (
+    input wire clk,
+    input wire rst,
+    input wire start,
+    input wire mode,
+    input wire signed [31:0] data_in_x,
+    input wire signed [31:0] data_in_y,
+    input wire signed [31:0] data_in_z,
+    output wire signed [31:0] data_out_x,
+    output wire signed [31:0] data_out_y,
+    output wire signed [31:0] data_out_z,
+    output wire [1:0] state,
+	 output wire signed [31:0] out_pipe_x0, out_pipe_y0, out_pipe_z0,
+	 output wire signed [31:0] out_pipe_x1, out_pipe_y1, out_pipe_z1,
+	 output wire signed [31:0] out_pipe_x2, out_pipe_y2, out_pipe_z2,
+	 output wire signed [31:0] out_pipe_x3, out_pipe_y3, out_pipe_z3,
+	 output wire signed [31:0] out_pipe_x4, out_pipe_y4, out_pipe_z4,
+	 output wire signed [31:0] out_pipe_x5, out_pipe_y5, out_pipe_z5,	 
+	 output wire signed [31:0] out_pipe_x6, out_pipe_y6, out_pipe_z6,
+	 output wire signed [31:0] out_pipe_x7, out_pipe_y7, out_pipe_z7, 
+	 output wire signed [31:0] out_pipe_x8, out_pipe_y8, out_pipe_z8,
+	 output wire signed [31:0] out_pipe_x9, out_pipe_y9, out_pipe_z9,
+	 output wire signed [31:0] out_pipe_x10, out_pipe_y10, out_pipe_z10,
+	 output wire signed [31:0] out_pipe_x11, out_pipe_y11, out_pipe_z11,
+	 output wire signed [31:0] out_pipe_x12, out_pipe_y12, out_pipe_z12,
+	 output wire signed [31:0] out_pipe_x13, out_pipe_y13, out_pipe_z13,
+	 output wire signed [31:0] out_pipe_x14, out_pipe_y14, out_pipe_z14,
+	 output wire signed [31:0] out_pipe_x15, out_pipe_y15, out_pipe_z15,
+	 output wire signed [31:0] out_pipe_x16, out_pipe_y16, out_pipe_z16,
+	 output wire signed [31:0] out_pipe_x17, out_pipe_y17, out_pipe_z17,
+	 output wire signed [31:0] out_pipe_x18, out_pipe_y18, out_pipe_z18,
+	 output wire signed [31:0] out_pipe_x19, out_pipe_y19, out_pipe_z19
+);
+    wire load_en_in;
+    wire enable_output;
+    wire done_stage_19;
+
+    Cordic_Controller Cordic_Controller(
+        .clk(clk),
+        .rst(rst),
+        .start(start),
+        .done_stage_19(done_stage_19),
+        .state(state),
+        .load_en_in(load_en_in),
+        .enable_output(enable_output)
+    );
+
+    Cordic_Datapath Datapath(
+        .clk(clk),
+        .rst(rst),
+        .load_en_in(load_en_in),
+        .enable_output(enable_output),
+        .mode(mode),
+        .data_in_x(data_in_x),
+        .data_in_y(data_in_y),
+        .data_in_z(data_in_z),
+        .data_out_x(data_out_x),
+        .data_out_y(data_out_y),
+        .data_out_z(data_out_z),
+        .done_stage_19(done_stage_19),
+		  .out_pipe_x0(out_pipe_x0), .out_pipe_y0(out_pipe_y0), .out_pipe_z0(out_pipe_z0),
+		  .out_pipe_x1(out_pipe_x1), .out_pipe_y1(out_pipe_y1), .out_pipe_z1(out_pipe_z1),
+		  .out_pipe_x2(out_pipe_x2), .out_pipe_y2(out_pipe_y2), .out_pipe_z2(out_pipe_z2),
+		  .out_pipe_x3(out_pipe_x3), .out_pipe_y3(out_pipe_y3), .out_pipe_z3(out_pipe_z3),
+		  .out_pipe_x4(out_pipe_x4), .out_pipe_y4(out_pipe_y4), .out_pipe_z4(out_pipe_z4),
+		  .out_pipe_x5(out_pipe_x5), .out_pipe_y5(out_pipe_y5), .out_pipe_z5(out_pipe_z5),
+		  .out_pipe_x6(out_pipe_x6), .out_pipe_y6(out_pipe_y6), .out_pipe_z6(out_pipe_z6),
+		  .out_pipe_x7(out_pipe_x7), .out_pipe_y7(out_pipe_y7), .out_pipe_z7(out_pipe_z7),
+	     .out_pipe_x8(out_pipe_x8), .out_pipe_y8(out_pipe_y8), .out_pipe_z8(out_pipe_z8),
+		  .out_pipe_x9(out_pipe_x9), .out_pipe_y9(out_pipe_y9), .out_pipe_z9(out_pipe_z9),
+		  .out_pipe_x10(out_pipe_x10), .out_pipe_y10(out_pipe_y10), .out_pipe_z10(out_pipe_z10),
+		  .out_pipe_x11(out_pipe_x11), .out_pipe_y11(out_pipe_y11), .out_pipe_z11(out_pipe_z11),
+		  .out_pipe_x12(out_pipe_x12), .out_pipe_y12(out_pipe_y12), .out_pipe_z12(out_pipe_z12),
+		  .out_pipe_x13(out_pipe_x13), .out_pipe_y13(out_pipe_y13), .out_pipe_z13(out_pipe_z13),
+		  .out_pipe_x14(out_pipe_x14), .out_pipe_y14(out_pipe_y14), .out_pipe_z14(out_pipe_z14),
+		  .out_pipe_x15(out_pipe_x15), .out_pipe_y15(out_pipe_y15), .out_pipe_z15(out_pipe_z15),
+		  .out_pipe_x16(out_pipe_x16), .out_pipe_y16(out_pipe_y16), .out_pipe_z16(out_pipe_z16),
+		  .out_pipe_x17(out_pipe_x17), .out_pipe_y17(out_pipe_y17), .out_pipe_z17(out_pipe_z17),
+		  .out_pipe_x18(out_pipe_x18), .out_pipe_y18(out_pipe_y18), .out_pipe_z18(out_pipe_z18),
+		  .out_pipe_x19(out_pipe_x19), .out_pipe_y19(out_pipe_y19), .out_pipe_z19(out_pipe_z19)		  
+    );
+endmodule
